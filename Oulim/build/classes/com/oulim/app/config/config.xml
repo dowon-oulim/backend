@@ -20,6 +20,9 @@
 		<!-- user DTO Alias -->
 		<typeAlias type="com.oulim.app.user.dto.UserDTO" alias="UserDTO"></typeAlias>
 		<typeAlias type="com.oulim.app.user.dto.CurrencyDTO" alias="CurrencyDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.user.dto.OrganCertDTO" alias="OrganCertDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.user.dto.OrganDTO" alias="OrganDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.user.dto.OrganUserDTO" alias="OrganUserDTO"></typeAlias>
 		
 		<!-- kkomi DTO Alias -->
 		<typeAlias type="com.oulim.app.kkomi.dto.KkomiDTO" alias="KkomiDTO"></typeAlias>
@@ -44,6 +47,9 @@
 	<mappers>
 		<mapper resource="com/oulim/app/user/mapper/UserMapper.xml" />
 		<mapper resource="com/oulim/app/kkomi/mapper/KkomiMapper.xml"/>
+		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
+		<mapper resource="com/oulim/app/community/mapper/CommunityMapper.xml"/>
+		<mapper resource="com/oulim/app/admin/mapper/AdminMapper.xml"/>
 	</mappers>
 </configuration>
 

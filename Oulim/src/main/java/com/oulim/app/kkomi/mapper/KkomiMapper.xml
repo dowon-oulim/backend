@@ -24,4 +24,7 @@
 			WHERE NVL(tk.kkomi_Lev,1) <= #{kkomiLev} and NVL(tk.kkomi_Exp,0) <= #{kkomiExp} ;
 		]]>
 	</merge>
+	
+	<!-- 상위권 포함 랭킹 조회 -->
+	
 </mapper>
