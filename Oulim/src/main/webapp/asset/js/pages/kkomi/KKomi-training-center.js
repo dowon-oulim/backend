@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const remain = document.querySelector(".js-remain")
 
   if(character){
-    character.src = `/Oulim/asset/image/character/komi-lv${mockData.level}.svg`
+    character.src = `${contextPath}/asset/image/character/komi-lv${mockData.level}.svg`
   }
 
   if(levelBadge){
