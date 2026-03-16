@@ -10,11 +10,11 @@ public class PropertyConfig {
 	static {
 		try(InputStream is = PropertyConfig.class
 				.getClassLoader()
-				.getResourceAsStream("context.properties")) {
+				.getResourceAsStream("db.properties")) {
 			if(is != null) {
 				props.load(is);
 			}else {
-				System.err.println("context.properties 파일을 찾을 수 없습니다!");
+				System.err.println("db.properties 파일을 찾을 수 없습니다!");
 			}
 		} catch(IOException e) {
 			e.printStackTrace();

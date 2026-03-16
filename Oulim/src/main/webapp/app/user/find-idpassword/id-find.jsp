@@ -25,8 +25,9 @@
       defer
       src="/Oulim/asset/js/pages/user/find-idpassword/id-find.js"
     ></script>
+    
   </head>
-
+	
   <body>
   	<jsp:include page="/app/include/header-nologin.jsp" />
     <div class="l-main">
