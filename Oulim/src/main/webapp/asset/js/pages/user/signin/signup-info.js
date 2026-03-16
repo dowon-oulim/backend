@@ -7,7 +7,7 @@ const nicknameError = document.getElementById("is-user-nickname-error");
 const userIdError = document.getElementById("is-user-id-error");
 const passwordError = document.getElementById("is-user-password-error");
 const passwordCheckError = document.getElementById(
-  "is-user-password-check-error",
+  "is-user-password-check-error"
 );
 
 const signupBtn = document.getElementById("is-signup-btn");

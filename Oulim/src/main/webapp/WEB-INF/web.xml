@@ -59,4 +59,63 @@
 	</filter-mapping> -->
 	
 	<!-- LoginCheck 매핑 -->
+	
+	<!-- Servlet 매핑 -->
+	<servlet>
+		<servlet-name>Kkomi</servlet-name>
+		<servlet-class>com.oulim.app.kkomi.controller.KkomiFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Kkomi</servlet-name>
+		<url-pattern>*.kko</url-pattern>		
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Community</servlet-name>
+		<servlet-class>com.oulim.app.community.controller.CommunityFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Community</servlet-name>
+		<url-pattern>*.commu</url-pattern>		
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Admin</servlet-name>
+		<servlet-class>com.oulim.app.admin.controller.AdminFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Admin</servlet-name>
+		<url-pattern>*.adm</url-pattern>		
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MyPage</servlet-name>
+		<servlet-class>com.oulim.app.mypage.controller.MyPageFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MyPage</servlet-name>
+		<url-pattern>*.mp</url-pattern>		
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>User</servlet-name>
+		<servlet-class>com.oulim.app.user.controller.UserFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>User</servlet-name>
+		<url-pattern>*.usr</url-pattern>		
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>VolunAct</servlet-name>
+		<servlet-class>com.oulim.app.volunteer.controller.activity.VolunActFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VolunAct</servlet-name>
+		<url-pattern>*.va</url-pattern>		
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>VolunManage</servlet-name>
+		<servlet-class>com.oulim.app.volunteer.controller.manangement.VolunManageFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VolunManage</servlet-name>
+		<url-pattern>*.vm</url-pattern>		
+	</servlet-mapping>
+	<!-- Servlet 매핑 종료 -->
 </web-app>

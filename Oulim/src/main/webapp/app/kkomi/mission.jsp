@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -16,11 +18,11 @@
 <!-- 스크립트 -->
   <script src="/Oulim/asset/js/pages/kkomi/mission.js"></script>
   <script src="/Oulim/asset/js/components/tab.js"></script>
-  <script defer src="/Oulim/asset/js/pages/main/include.js"></script> 
+  
+  <jsp:include page="/app/include/header-login.jsp" />
+   
 </head>
 <body>
-    <div id="header"></div>
-
     <main class="l-main">
         <div class="l-container">
             <section class="mission-header">
@@ -81,8 +83,8 @@
                 <button class="c-button c-button--secondary c-button--lg" onclick="location.href='/training'">수련소로 돌아가기</button>
             </div>
         </div>
-    </main>
-
-    <div id="footer"></div>
+    </main>    
 </body>
+<jsp:include page="/app/include/footer.jsp" />
+
 </html>
