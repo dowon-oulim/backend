@@ -20,7 +20,7 @@
 	</select>
 
 	<!-- 꼬미 도력 쌓기 -->
-	<merge id="upsertKkomi" parameterType="" resultType="">
+	<merge id="upsertKkomi" parameterType="KkomiDTO">
 		<![CDATA[
 		MERGE INTO	TBL_KKOMI tk USING (
 		SELECT #{User_No} AS user_no FROM DUAL
@@ -35,10 +35,11 @@
 	</merge>
 
 	<!-- 상위권 포함 랭킹 조회 -->
-	<select id="selectTopRanking" parameterType="" resultType="">
+	<select id="selectTopRanking" parameterType="int" resultType="">
 	<![CDATA[
 	SELECT * FROM
-		(SELECT tr.user_no, tr.Rank_point as rankPoint, RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, tu.user_Nickname, tk.kkomi_Lev
+		(SELECT tr.user_no, tr.Rank_point as rankPoint, RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, 
+		tu.user_Nickname, tk.kkomi_Lev
 			FROM TBL_RANKING tr
 			JOIN TBL_USER tu ON tr.user_no = tu.user_no
 			JOIN TBL_KKOMI tk ON tr.user_no = tk.user_no
@@ -51,7 +52,8 @@
 	<!-- 내 랭킹 조회 -->
 	<select id="selectMyRanking" parameterType="" resultType="">
 		SELECT
-		tr.user_no, tr.Rank_point as rankPoint,	RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, tnu.user_Nickname,	tk.kkomi_Lev
+		tr.user_no, tr.Rank_point as rankPoint,	RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, 
+		tnu.user_Nickname,	tk.kkomi_Lev
 		FROM TBL_RANKING tr
 		JOIN TBL_NORMAL_USER tnu ON tr.user_no = tnu.user_no
 		JOIN TBL_KKOMI tk ON tr.user_no = tk.user_no
