@@ -25,15 +25,24 @@
 		WHERE post_no = #{postNo}
 	</delete>
 	
+	<!-- 게시글 작성 -->
+	<insert id="postInsert" parameterType="CommunityPostDTO">
+		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+			SELECT SEQ_TBL_COMMUNITY_POST.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO TBL_COMMUNITY_POST (post_no, User_No, post_title, post_content, post_date, post_view_count, user_nickname)
+		VALUES(#{postNo}, #{userNo}, #{postTitle}, #{postContent}, #{postDate}, 0, #{userNickname})
+	</insert>
+	
 	<!-- 게시글 수정 -->
 	<update id="updatePost" parameterType="CommunityPostDTO">
 		UPDATE TBL_COMMUNITY_POST
-		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}
+		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}, POST_DATE = #{postDate}
 		WHERE POST_NO = #{postNo}
 	</update>
 	
 	<!-- 댓글 작성 -->
-	<insert id="commentPost" parameterType="CommunityCommentDTO">
+	<insert id="commentInsert" parameterType="CommunityCommentDTO">
 		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
 		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname, #{commentContent}, #{postDate})
 	</insert>
