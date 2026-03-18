@@ -19,7 +19,7 @@ public class UserDAO {
     }
     
     public int checkEmail(String userEmail) {
-    	return sqlSession.selectOne("user.checkEmail", userEmail);
+    	return sqlSession.selectOne("user.chkUserEmail", userEmail);
     }
     
     public int checkNickname(String userNickname) {

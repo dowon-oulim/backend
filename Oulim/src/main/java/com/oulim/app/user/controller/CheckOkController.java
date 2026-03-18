@@ -19,7 +19,7 @@ public class CheckOkController implements Execute{
 
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");
-
+		
 		int count = 0;
 
 		if ("email".equals(type)) {

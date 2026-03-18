@@ -81,6 +81,7 @@ public class UserFrontController extends HttpServlet {
 		    execute = new PwChangeOkController();
 		    
 		} else if (target.equals("/user/checkOk.usr")) {
+			System.out.println("데이터 중복체크 요청");
 		    result = new CheckOkController().execute(request, response);
 		} 
 		
