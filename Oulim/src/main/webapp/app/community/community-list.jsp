@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -33,6 +34,9 @@
     />
     <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
     <script defer src="${pageContext.request.contextPath}/asset/js/pages/community/community-list.js"></script>
+    <script>
+    	const contextPath = "${pageContext.request.contextPath}";
+    </script>
   </head>
   
   <body>
@@ -55,7 +59,7 @@
             <div class="l-community-search-box">
               <!-- <select class="c-community-search" name="search-type" id=""> -->
               <div class="c-select-size-controler">
-                <select class="c-select" name="search-type" id="">
+                <select class="c-select" name="search-type" id="searchType">
                   <option value="title">제목</option>
                   <option value="writer">작성자</option>
                 </select>
@@ -66,10 +70,11 @@
                 type="text"
                 name="keyword"
                 placeholder="검색어 입력"
+                id="keyword"
               />
 
               <div class="c-community-list-search-btn-container">
-                <button class="c-button c-button--primary">검색</button>
+                <button id="searchBtn" class="c-button c-button--primary">검색</button>
               </div>
             </div>
           </div>
@@ -85,79 +90,36 @@
             </div>
             <!-- body -->
             <div class="c-list__body">
-              <!-- 임시 데이터 -->
-              <a href="/Oulim/front/html/community/community-detail.html">
-                <div class="c-list__row">
-                  <span class="c-list__col"> 1 </span>
-                  <span class="c-list__col">제목</span>
-                  <span class="c-list__col">닉네임</span>
-                  <span class="c-list__col">2026.03.08</span>
-                  <span class="c-list__col">5001</span>
-                </div>
-              </a>
-              <div class="c-list__row">
-                <span class="c-list__col"> 2 </span>
-                <span class="c-list__col">제목2</span>
-                <span class="c-list__col">닉네임2</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5002</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 3 </span>
-                <span class="c-list__col">제목3</span>
-                <span class="c-list__col">닉네임3</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5003</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 4 </span>
-                <span class="c-list__col">제목4</span>
-                <span class="c-list__col">닉네임4</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5004</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 5 </span>
-                <span class="c-list__col">제목5</span>
-                <span class="c-list__col">닉네임5</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5005</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 6 </span>
-                <span class="c-list__col">제목6</span>
-                <span class="c-list__col">닉네임6</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5006</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 7 </span>
-                <span class="c-list__col">제목7</span>
-                <span class="c-list__col">닉네임7</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5007</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 8 </span>
-                <span class="c-list__col">제목8</span>
-                <span class="c-list__col">닉네임8</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5008</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 9 </span>
-                <span class="c-list__col">제목9</span>
-                <span class="c-list__col">닉네임9</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5009</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col"> 10 </span>
-                <span class="c-list__col">제목10</span>
-                <span class="c-list__col">닉네임10</span>
-                <span class="c-list__col">2026.03.08</span>
-                <span class="c-list__col">5010</span>
-              </div>
+            	<c:choose>
+            		<c:when test="${not empty postList}">
+            			<c:forEach var="post" items="${postList}">
+            				<div class="c-list__row">
+            					<span class="c-list__col">
+            						<c:out value="${post.getPostNo()}"/>
+            					</span>
+            					<span class="c-list__col">
+            						<a href="${pageContext.request.contextPath}/community/commuReadOk.commu?postNo=${post.postNo}">
+            							<c:out value="${post.getPostTitle()}"/>
+            						</a>
+            					</span>
+            					<span class="c-list__col">
+            						<c:out value="${post.getUserNickname()}"/>
+            					</span>
+            					<span class="c-list__col">
+            						<c:out value="${post.getPostDate()}"/>
+            					</span>
+            					<span class="c-list__col">
+            						<c:out value="${post.getLikeCount() }"/>
+            					</span>
+            				</div>
+            			</c:forEach>
+            		</c:when>
+            		<c:otherwise>
+            			<div>
+            				<div colspan="5" align="center">등록된 게시물이 없습니다.</div>
+            			</div>
+            		</c:otherwise>
+            	</c:choose>            
             </div>
           </div>
           <!-- 페이지네이션 -->
@@ -168,13 +130,45 @@
           >
             <!-- 페이지네이션  c-pagination-->
             <nav class="c-pagination">
-              <a class="c-pagination__link is-disabled">‹</a>
-              <a class="c-pagination__link is-active">1</a>
-              <a class="c-pagination__link">2</a>
-              <a class="c-pagination__link">3</a>
-              <a class="c-pagination__link">›</a>
+              <c:choose>
+              	<c:when test="${prev}">
+              		<a href="${pageContext.request.contextPath}/community/list.commu?page=${startPage-1}" 
+              		class="c-pagination__link">&lt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/community/list.commu?page=${startPage-1}" 
+              		class="c-pagination__link is-disabled" onclick="return false;">&lt;</a>
+              	</c:otherwise>
+              </c:choose>
+              <c:set var="realStartPage" value="${startPage < 1 ? 1 : startPage }"/>
+              <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+    			<c:choose>          
+    				<c:when test="${!(i == page)}">
+	              		<a href="${pageContext.request.contextPath}/community/list.commu?page=${i}&searchType=${searchType}&keyword=${keyword}"
+	              			 class="c-pagination__link">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:when>
+	               	<c:otherwise>
+	               		<a href="#" class="c-pagination__link is-active">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:otherwise>
+	            </c:choose>	            
+              </c:forEach>
+              <c:choose>
+              	<c:when test="${next}">
+              		<a href="${pageContext.request.contextPath}/community/list.commu?page=${endPage + 1}"
+              	 	class="c-pagination__link">&gt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/community/list.commu?page=${endPage + 1}"
+              	 	class="c-pagination__link is-disabled" onclick="return false;">&gt;</a>
+              	</c:otherwise>
+              </c:choose>
             </nav>
           </div>
+          
         </div>
       </div>
     </main>
