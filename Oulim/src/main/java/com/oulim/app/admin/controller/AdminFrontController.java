@@ -55,9 +55,16 @@ public class AdminFrontController extends HttpServlet {
 		Result result = null;
 		Execute execute = null;
 		switch(target) {
-		case "/admin/login.adm":
-			System.out.println("로그인 페이지 요청");
+		case "/admin/login.adm" ->
+			{
+				System.out.println("로그인 페이지 요청");
 				result = AdminLoginController().execute(request, response);
+				System.out.println();	
+			}
+		case "/admln/login.adm"->
+			{
+				result = new AdminLoginOkController().execute(request, response);
+			}
 		}
 		if (target.equals("/admin/login.adm")) {
 			System.out.println("로그인 페이지 요청");

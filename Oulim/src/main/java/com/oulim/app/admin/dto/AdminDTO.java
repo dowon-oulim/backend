@@ -19,7 +19,7 @@ public class AdminDTO {
 	
 	
 
-	int getAdminNum() {
+	public int getAdminNum() {
 		return adminNum;
 	}
 	public void setAdminNum(int adminNum) {
