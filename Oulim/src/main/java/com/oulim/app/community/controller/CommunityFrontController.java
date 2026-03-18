@@ -55,6 +55,8 @@ public class CommunityFrontController extends HttpServlet {
 		
 		case "/community/rePost.commu" ->{
 			System.out.println("게시글 수정");
+			result = new CommunityUpdateController().execute(request, response);
+			System.out.println("게시글 수정 페이지 이동 완료");
 		}
 		
 		case "/community/detail.commu" ->{

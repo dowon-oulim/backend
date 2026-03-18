@@ -150,7 +150,4 @@
 		ORDER BY post_date DESC
 	</select>
 	
-	<select id="isRecomended" parameterType="PostLikeDTO" resultType="int">
-		SELECT count(tpl.post_like_no) FROM TBL_POST_LIKE TPL WHERE TPL.post_no = #{postNo} and TPL.user_no = #{userNo} 
-	</select>
 </mapper>
