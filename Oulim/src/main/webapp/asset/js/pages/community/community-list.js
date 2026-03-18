@@ -6,6 +6,9 @@ const postBtn = document.querySelector(".c-community-post-btn .c-button");
 const isLogin = true;
 const userType = "USER";
 
+const searchBtn = document.getElementById("searchBtn");
+const searchType = document.getElementById("searchType");
+const keyword = document.getElementById("keyword");
 
 const USER_TYPE = {
     ADMIN : "ADMIN",
@@ -34,5 +37,15 @@ postBtn.addEventListener("click", (e) =>{
             return;
         }
 
-        location.href="/Oulim/front/html/community/community-post.html";
+        //location.href="/Oulim/front/html/community/community-post.html";
 });
+
+searchBtn.addEventListener("click", () =>{
+	const type = searchType.value;
+	const word = keyword.value.trim();
+	
+	const url = `${contextPath}/community/list.commu?searchType=${encodeURIComponent(type)}&keyword=${encodeURIComponent(word)}`;
+
+
+	location.href = url;
+})
