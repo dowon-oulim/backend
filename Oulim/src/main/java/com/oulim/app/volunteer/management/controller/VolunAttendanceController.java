@@ -17,21 +17,23 @@ public class VolunAttendanceController implements Execute {
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Result result = new Result();
-		PointJoinDTO pointJoinDTO = new PointJoinDTO();
+	    PointJoinDTO pointJoinDTO = new PointJoinDTO();
 
-		int volunActNo = Integer.parseInt(request.getParameter("volunActNo"));
-		String[] userNos = request.getParameterValues("attendanceUser");
+	    String[] userNos = request.getParameterValues("attendanceUser");
+	    int changeAmount = Integer.parseInt(request.getParameter("changeAmount"));
 
-		VolunManageServicePoint volunmanageservicepoint= new VolunManageServicePoint();
+	    VolunManageServicePoint volunManageServicePoint = new VolunManageServicePoint();
 
-		if (userNos != null && userNos.length > 0) {
-			VolunManageServicePoint.attendanceProcess(pointJoinDTO, userNos);
-		}
+	    pointJoinDTO.setChangeAmount(changeAmount);
 
-		result.setRedirect(true);
-		result.setPath(request.getContextPath() + "/volunteer-manage/detail.vm?volunActNo=" + volunActNo);
+	    if (userNos != null && userNos.length > 0) {
+	        volunManageServicePoint.attendanceProcess(pointJoinDTO, userNos);
+	    }
 
-		return result;
+	    result.setRedirect(true);
+	    result.setPath(request.getContextPath() + "/volunteer-manage/list.vm");
+
+	    return result;
 	}
 
 }
