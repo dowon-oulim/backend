@@ -57,10 +57,6 @@ public class MyPageFrontController extends HttpServlet {
 			result = new MyPageCheckOkController().execute(request, response);
 			break;
 			
-		case "/mypage/userInfo.mp":
-			result = new MyPageUserInfoController().execute(request, response);
-			break;
-			
 		case "/mypage/userEdit.mp": // 일반회원 정보 수정
 			result = new MyPageUserEditController().execute(request, response);
 			break;
@@ -94,10 +90,12 @@ public class MyPageFrontController extends HttpServlet {
 			break;
 			
 		case "/mypage/quit.mp": // 회원탈퇴
+			System.out.println("회원탈퇴 처리 요청");
 			result = new MyPageQuitController().execute(request, response);
 			break;
 
 		case "/mypage/quitOk.mp": // 회원탈퇴 ok
+			System.out.println("회원탈퇴 처리 완료");
 			result = new MyPageQuitOkController().execute(request, response);
 			break;
 		

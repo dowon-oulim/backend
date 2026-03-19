@@ -29,13 +29,13 @@ public class MyPageMyPostController implements Execute {
 
 		List<MyPageJoinDTO> mypost = mypageDAO.viewMyPost(userNo);
 
-		if (mypost != null) {
+//		if (mypost != null) {
 			path = "/app/mypage/community-history/myposts.jsp";
 			result.setPath(path);
 			result.setRedirect(false);
-		}
+//		}
 
-		return null;
+		return result;
 	}
 
 }
