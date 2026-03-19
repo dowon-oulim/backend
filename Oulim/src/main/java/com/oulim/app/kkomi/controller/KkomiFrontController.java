@@ -1,6 +1,7 @@
 package com.oulim.app.kkomi.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,9 +43,15 @@ public class KkomiFrontController extends HttpServlet {
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		Result result = null;
 		switch(target) {
-		case "kkomi/info.kko" ->{
+		case "/kkomi/info.kko" ->{
 			System.out.println("꼬미 정보 조회");
 			result = new KkomiInfoController().execute(request, response);
+			System.out.println("꼬미 정보 조회 완료");
+		}
+		case "/kkomi/feed.kko" ->{
+			System.out.println("꼬미 도력 쌓기");
+			result = new KkomiUpdateController().execute(request, response);
+			System.out.println();
 		}
 		}
 		

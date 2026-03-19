@@ -21,7 +21,15 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script>
-	const contextPath = "${Pagecontext.request.ContextPath}";
+	const contextPath = "${pageContext.request.contextPath}";
+	const isLogin = ${not empty sessionScope.userNo ? 'true' : 'false'};
+	const loginUserNo = ${sessionScope.userNo != null ? sessionScope.userNo : -1};
+	const userType = ${sessionScope.userType != null ? sessionScope.userType : -1};
+	const kkomiLev = Number("${not empty kkomi ? kkomi.kkomiLev : 1}");
+	const ranking  = Number("${not empty kkomi ? kkomi.myRanking : 0}");
+	const currExp = Number("${not empty kkomi ? kkomi.kkomiExp: 0}");
+	const needExp = Number("${not empty kkomi ? kkomi.needExp : 0}");
+	const point = Number("${not empty kkomi ? kkomi.point : 0}");
 </script>
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/kkomi/KKomi-training-center.js"></script>
 </head>
@@ -62,7 +70,7 @@
 					</div>
 					<!-- 액션 -->
 					<div class="c-action-grid">
-						<button class="c-action-card js-feed">
+						<button id="feedBtn" class="c-action-card js-feed">
 							<img src="${pageContext.request.contextPath}/asset/image/flower-icon.svg"> <span>먹이주기</span>
 						</button>
 						<button class="c-action-card js-mission">
