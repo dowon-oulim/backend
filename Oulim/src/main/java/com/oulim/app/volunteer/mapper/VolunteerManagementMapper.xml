@@ -3,6 +3,17 @@
 <mapper namespace="VolunteerManagement">
 	
 	
+	<!--하루 봉사자 계산-->
+	<select id="selectApplyCountByDate" parameterType="int" resultType="VolunApplyDTO">
+		SELECT
+			TO_CHAR(VOLUNACT_APPLYDATE, 'YYYY-MM-DD') AS volunActApplyDate,
+			COUNT(*) AS currentCount
+		FROM TBL_VOLUN_APPLY
+		WHERE VOLUN_ACT_NO = #{volunActNo}
+		GROUP BY TO_CHAR(VOLUNACT_APPLYDATE, 'YYYY-MM-DD')
+		ORDER BY volunActApplyDate
+	</select>
+	
 	<!--봉사자 총인원 -->
 	<select id="selectVolunteerCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)

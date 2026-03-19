@@ -11,7 +11,7 @@
 <!-- base css 필수 삽입-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/volunteer-manage/volunteer-manage-detail.css">
@@ -103,10 +103,21 @@
 						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">모집인원</span>
-						<span class="c-detail-card__value" id="volunteerCapacity">
-							${volunDetail.volunActRecruMaxCount}명
-						</span>
+						<span class="c-detail-card__label">날짜별 모집현황</span>
+						<div class="c-detail-card__value">
+							<c:choose>
+								<c:when test="${not empty applyCountList}">
+									<c:forEach var="count" items="${applyCountList}">
+										<div>
+											${count.volunActApplyDate} : ${count.currentCount} / ${volunDetail.volunActRecruMaxCount}명
+										</div>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<div>아직 신청자가 없습니다.</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 					<div class="c-detail-card__row">
 						<span class="c-detail-card__label">포인트</span>
@@ -198,10 +209,31 @@
 				</c:choose>
 			</div>
 		</div>
-					<div class="b-btn-layout">
-							<button type="submit" id="attendBtn" name="attendanceStatus" value="1" class="c-button c-button--primary c-button--md">출석</button>
-							<button type="submit" id="absentBtn" name="attendanceStatus" value="2" class="c-button c-button--secondary c-button--md">결석</button>
+					<div class="b-btn-layout attendance-submit-area">
+						<button type="submit"
+							id="attendBtn"
+							name="attendanceStatus"
+							value="1"
+							class="c-button c-button--primary c-button--md attendance-submit-area__button ${!canAttendance ? 'is-disabled' : ''}"
+							${!canAttendance ? 'disabled="disabled"' : ''}>
+							출석
+						</button>
+					
+						<button type="submit"
+							id="absentBtn"
+							name="attendanceStatus"
+							value="2"
+							class="c-button c-button--secondary c-button--md attendance-submit-area__button ${!canAttendance ? 'is-disabled' : ''}"
+							${!canAttendance ? 'disabled="disabled"' : ''}>
+							결석
+						</button>
 					</div>
+					
+					<c:if test="${!canAttendance}">
+						<p class="attendance-submit-area__message">
+							출석 · 결석 처리는 봉사 종료일 1일 이후부터 가능합니다.
+						</p>
+					</c:if>
 			</form>
 			<!-- 페이지네이션 -->
 			<nav class="c-pagination" id="attendancePagination">

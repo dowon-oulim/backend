@@ -12,7 +12,7 @@
     <!-- base css 필수 삽입-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-manage/volunteer-manage-edit.css" />
     <link rel="stylesheet"
