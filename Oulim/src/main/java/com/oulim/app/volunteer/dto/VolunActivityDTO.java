@@ -48,7 +48,8 @@ public class VolunActivityDTO {
 	private String orgName;			// 주체단체이름
 	private String actTypeName; // 활동분야
 	private String ageGroupName; // 활동가능연령대
-
+	private int startRow;
+	private int endRow;
 	
 	public String getOrgName() {
 		return orgName;
