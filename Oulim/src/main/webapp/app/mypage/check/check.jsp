@@ -104,7 +104,7 @@
               확인
             </button>
 
-            <button id="cancel" class="c-button c-button--secondary c-button--md" style="width:120px">
+            <button type="button" id="cancel" class="c-button c-button--secondary c-button--md" style="width:120px">
               취소
             </button>
           </div>
