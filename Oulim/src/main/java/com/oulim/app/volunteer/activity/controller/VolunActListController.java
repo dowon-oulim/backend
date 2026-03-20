@@ -14,6 +14,13 @@ import com.oulim.app.volunteer.dto.VolunActivityDTO;
 
 public class VolunActListController implements Execute {
 
+    private int parseIntSafe(String param) {
+        if (param == null || param.trim().equals("") || param.trim().equals("0")) {
+            return 0;
+        }
+        return Integer.parseInt(param.trim());
+    }
+
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -21,53 +28,40 @@ public class VolunActListController implements Execute {
         VolunteerActivityDAO dao = new VolunteerActivityDAO();
         VolunActivityDTO dto = new VolunActivityDTO();
 
-        // ===================== 파라미터수집 ======================
-        String actType = request.getParameter("actType");
-        String ageGroup = request.getParameter("ageGroup");
+        // 파라미터 받기
+        String actType = request.getParameter("volunActActType");
+        String ageGroup = request.getParameter("volunActAgeGroup");
         String recruitStatus = request.getParameter("recruitStatus");
         String keyword = request.getParameter("keyword");
         String searchType = request.getParameter("searchType");
         String organization = request.getParameter("organization");
 
-        if (actType != null && !actType.isEmpty()) {
-            dto.setVolunActActType(Integer.parseInt(actType));
-        }
+        // DTO 세팅
+        dto.setVolunActActType(parseIntSafe(actType));
+        dto.setVolunActAgeGroup(parseIntSafe(ageGroup));
+        dto.setRecruitStatus(recruitStatus == null ? "0" : recruitStatus.trim());
+        dto.setKeyword(keyword == null ? "" : keyword.trim());
+        dto.setSearchType(searchType == null ? "title" : searchType.trim());
+        dto.setOrganization(organization == null ? "" : organization.trim());
 
-        if (ageGroup != null && !ageGroup.isEmpty()) {
-            dto.setVolunActAgeGroup(Integer.parseInt(ageGroup));
-        }
+        // 페이지 처리
+        int page = parseIntSafe(request.getParameter("page"));
+        if (page == 0) page = 1;
 
-        if (recruitStatus != null && !recruitStatus.isEmpty()) {
-            dto.setRecruitStatus(recruitStatus);
-        }
-
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            dto.setKeyword(keyword);
-        }
-
-        if (searchType != null && !searchType.isEmpty()) {
-            dto.setSearchType(searchType);
-        }
-
-        if (organization != null && !organization.trim().isEmpty()) {
-            dto.setOrganization(organization);
-            
-        }
-        
-        
-        
-
-     // ======================== 페이징 ====================
-        int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
         int size = 10;
 
-        // 전체 데이터 개수
         int totalCount = dao.selectCount(dto);
+        int totalPage = (int) Math.ceil((double) totalCount / size);
 
-        // 전체 페이지 수
-        int totalPage = (int)Math.ceil((double) totalCount / size);
+        int startRow = (page - 1) * size;
+        int endRow = page * size;
 
-        // 시작 / 끝 페이지 (블록 기준)
+        dto.setStartRow(startRow);
+        dto.setEndRow(endRow);
+
+        List<VolunActivityDTO> list = dao.selectVolActList(dto);
+
+        // ⭐ 페이지 블록 처리
         int pageBlock = 5;
         int startPage = ((page - 1) / pageBlock) * pageBlock + 1;
         int endPage = startPage + pageBlock - 1;
@@ -76,28 +70,15 @@ public class VolunActListController implements Execute {
             endPage = totalPage;
         }
 
-        // ROWNUM용
-        int startRow = (page - 1) * size;
-        int endRow = page * size;
-
-        dto.setStartRow(startRow);
-        dto.setEndRow(endRow);
-        
-        System.out.println("totalCount = " + totalCount);
-        System.out.println("totalPage = " + totalPage);
-        System.out.println("page = " + page);
-        System.out.println("startRow = " + startRow);
-        System.out.println("endRow = " + endRow);
-        // ===== 조회 =====
-        List<VolunActivityDTO> list = dao.selectVolActList(dto);
-
-        // ===== 전달 =====
+        // 데이터 전달
         request.setAttribute("volunteerList", list);
-        request.setAttribute("search", dto);
         request.setAttribute("page", page);
+        request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);
         request.setAttribute("endPage", endPage);
-        request.setAttribute("totalPage", totalPage);
+
+        // ⭐ 핵심: search 객체로 전달
+        request.setAttribute("search", dto);
 
         Result result = new Result();
         result.setPath("/app/volunteer-activity/volunAct-list.jsp");

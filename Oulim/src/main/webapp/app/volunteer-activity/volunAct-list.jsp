@@ -1,7 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%
-String path = request.getContextPath();
-%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!doctype html>
@@ -52,91 +49,71 @@ href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
 			<div class="p-volunAct-list-main">
 				<form method="get"
 					action="${pageContext.request.contextPath}/volunteer-activity/list.va">
+				
 					<div class="l-volunAct-list-search-option-group">
 						<div class="l-volunAct-list-search-grid">
+				
 							<!-- 활동분야 -->
 							<div class="l-volunAct-list-search-item">
-								<label class="c-volunAct-list-search-label">활동분야</label> <select
-									name="actType" class="c-select">
-									<option value="0">전체</option>
-									<option value="1"
-										${search.volunActActType == 1 ? 'selected' : ''}>환경</option>
-									<option value="2"
-										${search.volunActActType == 2 ? 'selected' : ''}>의료</option>
-									<option value="3"
-										${search.volunActActType == 3 ? 'selected' : ''}>교육</option>
-									<option value="4"
-										${search.volunActActType == 4 ? 'selected' : ''}>생활·편의</option>
-									<option value="5"
-										${search.volunActActType == 5 ? 'selected' : ''}>문화·체육·예술</option>
-									<option value="6"
-										${search.volunActActType == 6 ? 'selected' : ''}>기타</option>
+								<label class="c-volunAct-list-search-label">활동분야</label>
+								<select name="volunActActType" class="c-select">
+									<option value="">전체</option>
+									<option value="1" ${search.volunActActType == 1 ? 'selected' : ''}>환경</option>
+									<option value="2" ${search.volunActActType == 2 ? 'selected' : ''}>의료</option>
+									<option value="3" ${search.volunActActType == 3 ? 'selected' : ''}>교육</option>
+									<option value="4" ${search.volunActActType == 4 ? 'selected' : ''}>생활·편의</option>
+									<option value="5" ${search.volunActActType == 5 ? 'selected' : ''}>문화·체육·예술</option>
+									<option value="6" ${search.volunActActType == 6 ? 'selected' : ''}>기타</option>
 								</select>
 							</div>
-
+				
 							<!-- 모집상태 -->
 							<div class="l-volunAct-list-search-item">
-								<label class="c-volunAct-list-search-label">모집상태</label> <select
-									name="recruitStatus" class="c-select">
+								<label class="c-volunAct-list-search-label">모집상태</label>
+								<select name="recruitStatus" class="c-select">
 									<option value="0">전체</option>
-									<option value="1"
-										${search.recruitStatus == '1' ? 'selected' : ''}>모집중</option>
-									<option value="2"
-										${search.recruitStatus == '2' ? 'selected' : ''}>모집
-										예정</option>
-									<option value="3"
-										${search.recruitStatus == '3' ? 'selected' : ''}>모집
-										마감</option>
+									<option value="1" ${search.recruitStatus == '1' ? 'selected' : ''}>모집중</option>
+									<option value="2" ${search.recruitStatus == '2' ? 'selected' : ''}>모집예정</option>
+									<option value="3" ${search.recruitStatus == '3' ? 'selected' : ''}>마감</option>
 								</select>
 							</div>
-
+				
 							<!-- 주체 단체 -->
 							<div class="l-volunAct-list-search-item">
-								<label class="c-volunAct-list-search-label">주체 단체</label> <input
-									class="c-input" type="text" name="organization"
+								<label class="c-volunAct-list-search-label">주체 단체</label>
+								<input class="c-input" type="text" name="organization"
 									value="${search.organization}" placeholder="주체 기업명" />
 							</div>
-
+				
 							<!-- 참여 연령 -->
 							<div class="l-volunAct-list-search-item">
-								<label class="c-volunAct-list-search-label">참여 가능 연령</label> <select
-									name="ageGroup" class="c-select">
+								<label class="c-volunAct-list-search-label">참여 가능 연령</label>
+								<select name="volunActAgeGroup" class="c-select">
 									<option value="0">전체</option>
-									<option value="1"
-										${search.volunActAgeGroup == 1 ? 'selected' : ''}>청소년
-										(14~19)</option>
-									<option value="2"
-										${search.volunActAgeGroup == 2 ? 'selected' : ''}>청년
-										(20~30)</option>
-									<option value="3"
-										${search.volunActAgeGroup == 3 ? 'selected' : ''}>직장인
-										(30+)</option>
+									<option value="1" ${search.volunActAgeGroup == 1 ? 'selected' : ''}>청소년</option>
+									<option value="2" ${search.volunActAgeGroup == 2 ? 'selected' : ''}>청년</option>
+									<option value="3" ${search.volunActAgeGroup == 3 ? 'selected' : ''}>직장인</option>
 								</select>
 							</div>
-
+				
 						</div>
-
-						<!-- 키워드 영역 -->
+				
+						<!-- 키워드 -->
 						<div class="l-volunAct-list-search-keyword">
-
 							<select class="c-select" name="searchType">
-								<option value="title"
-									${search.searchType == 'title' ? 'selected' : ''}>제목</option>
-								<option value="point"
-									${search.searchType == 'point' ? 'selected' : ''}>포인트</option>
+								<option value="title" ${search.searchType == 'title' ? 'selected' : ''}>제목</option>
+								<option value="point" ${search.searchType == 'point' ? 'selected' : ''}>포인트</option>
 							</select>
-
-							<!-- name -->
+				
 							<input class="c-input" type="text" name="keyword"
-								value="${search.keyword}" placeholder="관련 제목 검색" />
+								value="${search.keyword}" placeholder="검색어 입력" />
 						</div>
-
-						<!-- 버튼 -->
+				
 						<div class="l-volunAct-list-search-submit">
 							<button type="submit"
 								class="c-button c-button--primary c-button--lg">조회</button>
 						</div>
-
+				
 					</div>
 				</form>
 				<div class="l-volunAct-list-card-list">
@@ -177,6 +154,7 @@ href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
 
 											<!-- 왼쪽 -->
 											<div class="card-left">
+												<div>주체단체</div>
 												<div>봉사위치</div>
 												<div>봉사기간</div>
 												<div>포인트</div>
@@ -184,6 +162,7 @@ href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
 
 											<!-- 오른쪽 -->
 											<div class="card-right">
+												<div>${item.orgName}</div>
 												<div>${item.volunActAddress}</div>
 												<div>${item.volunActProcBegin} ~
 													${item.volunActProcEnd}</div>
@@ -201,70 +180,72 @@ href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
 					<!-- 봉사목록 카드 리스트 영역 종료-->
 				</div>
 				<div class="l-volunAct-list-pagination">
-					<div class="c-pagination">
-						<c:choose>
-							<c:when test="${startPage > 1}">
-								<div class="c-pagination__item">
-									<a class="c-pagination__link"
-										href="?page=${startPage-1}
-			                   &actType=${search.volunActActType}
-			                   &ageGroup=${search.volunActAgeGroup}
-			                   &recruitStatus=${search.recruitStatus}
-			                   &keyword=${search.keyword}
-			                   &searchType=${search.searchType}
-			                   &organization=${search.organization}">
-										&lt; </a>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="c-pagination__item">
-									<span class="c-pagination__link is-disabled">&lt;</span>
-								</div>
-							</c:otherwise>
+				    <div class="c-pagination">
+				
+				        <!-- 이전 -->
+				        <c:choose>
+						    <c:when test="${page > 1}">
+						        <c:url var="prevUrl" value="/volunteer-activity/list.va">
+						            <c:param name="page" value="${page - 1}" />
+						            <c:param name="volunActActType" value="${search.volunActActType}" />
+						            <c:param name="volunActAgeGroup" value="${search.volunActAgeGroup}" />
+						            <c:param name="recruitStatus" value="${search.recruitStatus}" />
+						            <c:param name="keyword" value="${search.keyword}" />
+						            <c:param name="searchType" value="${search.searchType}" />
+						            <c:param name="organization" value="${search.organization}" />
+						        </c:url>
+						
+						        <a class="c-pagination__link" href="${prevUrl}">&lt;</a>
+						    </c:when>
+						    <c:otherwise>
+						        <span class="c-pagination__link is-disabled">&lt;</span>
+						    </c:otherwise>
 						</c:choose>
-						<!-- 이전 -->
-
-
-						<!-- 페이지 번호 -->
-						<c:forEach begin="${startPage}" end="${endPage}" var="i">
-							<div class="c-pagination__item">
-								<a
-									href="?page=${i}
-			               &actType=${search.volunActActType}
-			               &ageGroup=${search.volunActAgeGroup}
-			               &recruitStatus=${search.recruitStatus}
-			               &keyword=${search.keyword}
-			               &searchType=${search.searchType}
-			               &organization=${search.organization}"
-									class="c-pagination__link ${i == page ? 'is-active' : ''}">
-									${i} </a>
-							</div>
-						</c:forEach>
-
-
-						<!-- 다음 -->
-						<c:choose>
-							<c:when test="${endPage < totalPage}">
-								<div class="c-pagination__item">
-									<a class="c-pagination__link"
-										href="?page=${endPage+1}
-			                   &actType=${search.volunActActType}
-			                   &ageGroup=${search.volunActAgeGroup}
-			                   &recruitStatus=${search.recruitStatus}
-			                   &keyword=${search.keyword}
-			                   &searchType=${search.searchType}
-			                   &organization=${search.organization}">
-										&gt; </a>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="c-pagination__item">
-									<span class="c-pagination__link is-disabled">&gt;</span>
-								</div>
-							</c:otherwise>
+				
+				        <!-- 페이지 번호 -->
+				        <c:forEach begin="${startPage}" end="${endPage}" var="i">
+				            <div class="c-pagination__item">
+				
+				                <c:url var="pageUrl" value="/volunteer-activity/list.va">
+				                    <c:param name="page" value="${i}" />
+				                    <c:param name="volunActActType" value="${search.volunActActType}" />
+				                    <c:param name="volunActAgeGroup" value="${search.volunActAgeGroup}" />
+				                    <c:param name="recruitStatus" value="${search.recruitStatus}" />
+				                    <c:param name="keyword" value="${search.keyword}" />
+				                    <c:param name="searchType" value="${search.searchType}" />
+				                    <c:param name="organization" value="${search.organization}" />
+				                </c:url>
+				
+				                <a class="c-pagination__link ${i == page ? 'is-active' : ''}"
+				                   href="${pageUrl}">
+				                    ${i}
+				                </a>
+				            </div>
+				        </c:forEach>
+				
+				        <!-- 다음 -->
+				       <c:choose>
+						    <c:when test="${page < totalPage}">
+						        <c:url var="nextUrl" value="/volunteer-activity/list.va">
+						            <c:param name="page" value="${page + 1}" />
+						            <c:param name="volunActActType" value="${search.volunActActType}" />
+						            <c:param name="volunActAgeGroup" value="${search.volunActAgeGroup}" />
+						            <c:param name="recruitStatus" value="${search.recruitStatus}" />
+						            <c:param name="keyword" value="${search.keyword}" />
+						            <c:param name="searchType" value="${search.searchType}" />
+						            <c:param name="organization" value="${search.organization}" />
+						        </c:url>
+						
+						        <a class="c-pagination__link" href="${nextUrl}">&gt;</a>
+						    </c:when>
+						    <c:otherwise>
+						        <span class="c-pagination__link is-disabled">&gt;</span>
+						    </c:otherwise>
 						</c:choose>
-					</div>
+				    </div>
 				</div>
+				
+				
 			</div>
 		</div>
 	</div>

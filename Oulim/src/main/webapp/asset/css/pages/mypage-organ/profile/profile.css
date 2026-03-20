@@ -72,16 +72,8 @@ footer {
 .main-section2 {
     display: flex;
     margin: 40px 0;
-    gap:50px;
-    justify-content: center;
+    justify-content: space-between;
 }
-
-.main-section2 .c-card{
-   width:320px !important;
-   height: auto !important;
-   overflow-wrap: break-word;
-}
-
 
 
 
