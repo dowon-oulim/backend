@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 				console.error("게시글 추천 실패 : ", err);
 				alert("게시글 추천에 실패했습니다");
 			}
-			location.reload();
 		}
+		location.reload();
 	});
 
 	returnBtn.addEventListener("click", (e) => {

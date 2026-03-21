@@ -88,4 +88,19 @@
 			VALUES ( #{userNo}, #{rankPoint}, src.curr_season)
 	</update>
 	
+	<!-- 미션 조회 -->
+	<select id="selectUserMission" parameterType="int">
+		SELECT tm.MISSION_ID AS mission_id,
+			tm.MISSION_NAME AS mission_name,
+			tm.MISSION_DETAIL AS mission_detail,
+			tm.MISSION_NEEDCOUNT AS mission_need_count,
+			tm.MISSION_TYPE AS mission_type ,
+			tm.REWARD_ID AS reward_id,
+			NVL(tum.USER_NO,#{userNo}) AS user_no,
+			NVL(tum.MISSION_IS_REWARD,0) AS mission_is_reward,
+			tum.MISSION_LAST_UPDATE_DATE AS mission_last_update_date,
+			NVL(tum.MISSION_COUNT,0) AS mission_count
+		FROM tbl_mission tm
+		LEFT JOIN TBL_USER_MISSION tum ON tm.MISSION_ID = tum.MISSION_ID AND tum.USER_NO = #{userNo};
+	</select>
 </mapper>

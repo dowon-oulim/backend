@@ -4,20 +4,25 @@
 <mapper namespace="community">
 	<!-- 개시물 총 갯수 계산 -->
 	<select id="getTotalPost" resultType="int">
-		SELECT COUNT(post_no) FROM tbl_community_post
+		SELECT COUNT(post_no) FROM
+		tbl_community_post
 	</select>
-	
+
 	<!-- 댓글 총 갯수 계산 -->
-	<select id="getTotalComment" parameterType="int" resultType="int">
+	<select id="getTotalComment" parameterType="int"
+		resultType="int">
 		SELECT COUNT(COMMENT_NO) FROM TBL_COMMUNITY_COMMENT
-		WHERE POST_NO = #{postNo}
+		WHERE
+		POST_NO = #{postNo}
 	</select>
-	
+
 	<!-- 조회수 증가 -->
 	<update id="updateReadCount" parameterType="int">
-		UPDATE tbl_community_post
+		UPDATE
+		tbl_community_post
 		set Post_View_Count = Post_View_Count + 1
-		WHERE post_no = #{postNo}
+		WHERE
+		post_no = #{postNo}
 	</update>
 
 	<!-- 게시글 삭제 -->
@@ -25,46 +30,48 @@
 		DELETE FROM tbl_community_post
 		WHERE post_no = #{postNo}
 	</delete>
-	
+
 	<!-- 게시글 작성 -->
 	<insert id="postInsert" parameterType="CommunityPostDTO">
-		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="postNo" resultType="int"
+			order="BEFORE">
 			SELECT SEQ_TBL_COMMUNITY_POST.nextval FROM DUAL
 		</selectKey>
-		INSERT INTO TBL_COMMUNITY_POST (post_no, User_No, post_title, post_content, post_date, post_view_count, user_nickname)
-		VALUES(#{postNo}, #{userNo}, #{postTitle}, #{postContent}, sysdate, 0, #{userNickname})
+		INSERT INTO TBL_COMMUNITY_POST (post_no, User_No, post_title,
+		post_content, post_date, post_view_count, user_nickname)
+		VALUES(#{postNo}, #{userNo}, #{postTitle}, #{postContent}, sysdate, 0,
+		#{userNickname})
 	</insert>
-	
+
 	<!-- 게시글 수정 -->
 	<update id="updatePost" parameterType="CommunityPostDTO">
 		UPDATE TBL_COMMUNITY_POST
-		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}, POST_DATE = sysdate
-		WHERE POST_NO = #{postNo}
+		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent},
+		USER_NICKNAME= #{userNickname}, POST_DATE = sysdate
+		WHERE POST_NO =
+		#{postNo}
 	</update>
-	
+
 	<!-- 댓글 작성 -->
 	<insert id="commentInsert" parameterType="CommunityCommentDTO">
-		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
-		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname}, #{commentContent}, sysdate)
+		INSERT INTO
+		TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME,
+		COMMENT_CONTENT, POST_DATE)
+		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval,
+		#{userNo}, #{postNo}, #{userNickname}, #{commentContent}, sysdate)
 	</insert>
-	
+
 	<!-- 전체 게시글 조회 -->
-<!-- 	<select id="selectPostAll" resultType="CommunityPostJoinDTO">
-		<![CDATA[
-			SELECT * FROM (
-			SELECT ROWNUM AS RNUM, subquery.*
-			FROM (
-				SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, 
-				(select count(post_like_no) from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count
-				FROM tbl_community_post tcp
-				ORDER BY tcp.post_date DESC			
-			) subquery
-			) WHERE RNUM BETWEEN #{startRow} AND #{endRow}
-		]]>
-	</select> -->
-	
-		<!-- 전체 게시글 조회 -->
-	<select id="selectPostAll" parameterType="map" resultType="CommunityPostJoinDTO">
+	<!-- <select id="selectPostAll" resultType="CommunityPostJoinDTO"> <![CDATA[ 
+		SELECT * FROM ( SELECT ROWNUM AS RNUM, subquery.* FROM ( SELECT tcp.post_no,tcp.user_no, 
+		tcp.post_title, tcp.user_nickname, tcp.post_date, (select count(post_like_no) 
+		from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count FROM 
+		tbl_community_post tcp ORDER BY tcp.post_date DESC ) subquery ) WHERE RNUM 
+		BETWEEN #{startRow} AND #{endRow} ]]> </select> -->
+
+	<!-- 전체 게시글 조회 -->
+	<select id="selectPostAll" parameterType="map"
+		resultType="CommunityPostJoinDTO">
  <![CDATA[
         SELECT * FROM (
             SELECT ROWNUM AS rnum, subquery.*
@@ -79,27 +86,28 @@
                          WHERE tpl.post_no = tcp.post_no) AS like_count
                 FROM tbl_community_post tcp
     ]]>
-                <where>
-                    <if test="keyword != null and keyword != ''">
-                        <choose>
-                            <when test="searchType == 'title'">
-                                tcp.post_title LIKE '%' || #{keyword} || '%'
-                            </when>
-                            <when test="searchType == 'writer'">
-                                tcp.user_nickname LIKE '%' || #{keyword} || '%'
-                            </when>
-                        </choose>
-                    </if>
-                </where>
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<choose>
+					<when test="searchType == 'title'">
+						tcp.post_title LIKE '%' || #{keyword} || '%'
+					</when>
+					<when test="searchType == 'writer'">
+						tcp.user_nickname LIKE '%' || #{keyword} || '%'
+					</when>
+				</choose>
+			</if>
+		</where>
     <![CDATA[
                 ORDER BY tcp.post_date DESC
             ) subquery
         ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
     ]]>
 	</select>
-	
+
 	<!-- 게시글 상세 -->
-	<select id="selectPost" parameterType="int" resultType="CommunityPostJoinDTO">
+	<select id="selectPost" parameterType="int"
+		resultType="CommunityPostJoinDTO">
 	<![CDATA[
 		SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, tcp.post_content,
 		tcp.post_view_count, 
@@ -110,9 +118,10 @@
 		where tcp.post_no = #{postNo}
 	]]>
 	</select>
-	
-	<!-- 댓글 조회 --> 
-	<select id="selectPostComment" parameterType="Map" resultType="CommunityCommentDTO">
+
+	<!-- 댓글 조회 -->
+	<select id="selectPostComment" parameterType="Map"
+		resultType="CommunityCommentDTO">
 		<![CDATA[
 			SELECT * FROM(
 				SELECT ROWNUM AS rnum, subquery.*
@@ -124,17 +133,21 @@
 				) WHERE rnum between #{startRow} and #{endRow}				
 		]]>
 	</select>
-	
+
 	<!-- 게시글 추천 -->
 	<insert id="postLike" parameterType="PostLikeDTO">
-		INSERT INTO TBL_POST_LIKE (Post_Like_No, Post_No, User_No)
-		VALUES (SEQ_TBL_POST_LIKE.nextval, #{postNo}, #{userNo})
+		INSERT INTO TBL_POST_LIKE
+		(Post_Like_No, Post_No, User_No)
+		VALUES (SEQ_TBL_POST_LIKE.nextval,
+		#{postNo}, #{userNo})
 	</insert>
-	
+
 	<!-- 작성글 검색 -->
-	<select id="searchPost" parameterType="map" resultType="CommunityPostJoinDTO">
+	<select id="searchPost" parameterType="map"
+		resultType="CommunityPostJoinDTO">
 		SELEDCT post_no, post_Title, user_nickname, post_date
-		FROM tbl_community_post
+		FROM
+		tbl_community_post
 		<where>
 			<if test="keyword != null and keyword != ''">
 				<choose>
@@ -149,5 +162,27 @@
 		</where>
 		ORDER BY post_date DESC
 	</select>
-	
+
+	<!-- 이미지가 존재하는 게시글 조회(메인 출력용) -->
+	<select id="searchImagePost" resultType="CommunityPostJoinDTO">
+	<![CDATA[
+			SELECT * FROM (
+			    SELECT ROWNUM AS rn, A.*
+			    FROM (
+			        SELECT 
+			            tcp.post_no AS post_no,
+			            tcp.post_title AS post_title,
+			            tcp.user_nickname AS user_nickname
+			        FROM TBL_COMMUNITY_POST tcp
+			        WHERE EXISTS (
+			            SELECT 1 
+			            FROM tbl_post_image tpi 
+			            WHERE tpi.post_no = tcp.post_no
+			        )
+			        ORDER BY tcp.post_date DESC
+			    ) A
+			) 
+			WHERE rn <= 3
+		]]>
+	</select>
 </mapper>

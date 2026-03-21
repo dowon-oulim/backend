@@ -97,6 +97,13 @@ public class CommunityFrontController extends HttpServlet {
 			result = new CommunityCommentListOkController().execute(request, response);
 			System.out.println("댓글 갱신 완료");
 		}
+		
+		case "/community/main.commu" ->{
+			System.out.println("메인 화면 게시글 조회");
+			result = new CommunityMainPostController().execute(request, response);
+			System.out.println("메인 화면 게시글 조회");
+		}
+		
 		}
 		
 		if(result != null && result.getPath() != null) {

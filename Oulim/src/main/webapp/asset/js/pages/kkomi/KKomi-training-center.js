@@ -85,11 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   missionBtn?.addEventListener("click", () => {
-    location.href="/mission"
+    location.href=`${contextPath}/kkomi/mission.kko`
   })
 
   storageBtn?.addEventListener("click", () => {
-    location.href="/storage"
+    location.href=`${contextPath}/app/kkomi/storage-box.jsp`
   })
 
 })

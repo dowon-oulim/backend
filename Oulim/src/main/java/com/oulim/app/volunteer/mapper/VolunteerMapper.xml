@@ -214,4 +214,27 @@
     WHERE VOLUN_ACT_NO = #{volunActNo}
       AND USER_NO = #{userNo}
 </update>
+
+<!-- 메인화면 봉사활동 조회 -->
+<select id="selectVolunMain" resultType="VolunActivityDTO">
+	<![CDATA[    
+		SELECT ROWNUM RN, A.*
+        FROM (
+            SELECT
+                VA.Volun_Act_No            AS volunActNo,
+                VA.Volun_Act_Title         AS volunActTitle,
+                VA.Volun_Act_Point         AS volunActPoint,
+                VA.Volun_Act_Address       AS volunActAddress,
+
+                /* 모집 상태 */
+                CASE
+                    WHEN SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End THEN '모집중'
+                    WHEN SYSDATE < VA.Volun_Act_Recru_Begin THEN '모집예정'
+                    ELSE '모집마감'
+                END AS recruStatus
+                FROM TBL_VOLUN_ACTIVITY VA
+                ORDER BY VA.Volun_Act_No DESC) A
+         WHERE ROWNUM <= 10                
+         ]]>
+</select>
 </mapper>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,6 +20,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
     <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/main.js"></script>
+    <script>
+		const contextPath = "${pageContext.request.contextPath}";
+
+    </script>
 </head>
 <body>
     <jsp:include page="/app/include/header.jsp" />
@@ -30,8 +37,8 @@
                         <h1 class="visual-title">작은 선행이 모여<br>우리 <span class="highlight">꼬미</span>를 변화시켜요!</h1>
                         <p class="visual-desc">봉사활동은 어렵지 않아요. 지금 바로 시작하고<br>세상을 따뜻하게 만드는 도력을 쌓아보세요!</p>
                         <div class="visual-btns">
-                            <a href="#" class="c-button c-button--primary c-button--sm">봉사활동 찾기</a>
-                            <a href="#" class="c-button c-button--Tertiary c-button--sm">미션 확인</a>
+                            <a href="${pageContext.request.contextPath}/volunteer-activity/list.va" class="c-button c-button--primary c-button--sm">봉사활동 찾기</a>
+                            <a href="${pageContext.request.contextPath}/kkomi/info.kko" class="c-button c-button--Tertiary c-button--sm">나의 꼬미 찾기</a>
                         </div>
                     </div>
                     <div class="visual-char">
@@ -50,7 +57,7 @@
                         <h2 class="section-title">따끈따끈한 봉사 소식</h2>
                         <p class="section-subtitle">새로운 봉사자들이 기다리고 있어요!</p>
                     </div>
-                    <a href="#" class="c-button c-button--secondary c-button--sm">더 보러가기 &gt;</a>
+                    <a href="${pageContext.request.contextPath}/volunteer-activity/list.va" class="c-button c-button--secondary c-button--sm">더 보러가기 &gt;</a>
                 </div>
                 
                 <div class="slider-container">
@@ -71,7 +78,7 @@
                         <h2 class="section-title">따뜻한 마음의 기록</h2>
                         <p class="section-subtitle">수행자들이 직접 남긴 생생한 후기</p>
                     </div>
-                    <a href="#" class="c-button c-button--secondary c-button--sm">더 보러가기 &gt;</a>
+                    <a href="${pageContext.request.contextPath }/community/list.commu" class="c-button c-button--secondary c-button--sm">더 보러가기 &gt;</a>
                 </div>
                 <div class="review-grid js-review-container">
                     </div>
