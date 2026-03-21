@@ -137,15 +137,21 @@
 				</div>
 				<div>
 					<nav class="c-pagination">
-						<c:if test="${page > 1}">
-							<a class="c-pagination__link" href="?page=${page-1}">‹</a>
-						</c:if>
-						<c:forEach var="i" begin="1" end="${lastPage}">
-							<a class="c-pagination__link ${i==page?'is-active':''}"
-								href="?page=${i}">${i}</a>
-						</c:forEach>
-						<c:if test="${page < lastPage}">
-							<a class="c-pagination__link" href="?page=${page+1}">›</a>
+						<c:if test="${lastPage > 1}">
+							<nav class="c-pagination">
+								<c:if test="${page > 1}">
+									<a class="c-pagination__link" href="?page=${page-1}">‹</a>
+								</c:if>
+
+								<c:forEach var="i" begin="1" end="${lastPage}">
+									<a class="c-pagination__link ${i==page?'is-active':''}"
+										href="?page=${i}">${i}</a>
+								</c:forEach>
+
+								<c:if test="${page < lastPage}">
+									<a class="c-pagination__link" href="?page=${page+1}">›</a>
+								</c:if>
+							</nav>
 						</c:if>
 					</nav>
 

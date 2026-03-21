@@ -181,16 +181,17 @@ WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
 	</select>
 	
-	<select id="comingVolunTotal" parameterType="int" resultType="int">
+<select id="comingVolunTotal" parameterType="int" resultType="int">
 <![CDATA[
-SELECT COUNT(*) 
+SELECT COUNT(*)
 FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
     ON tva.volun_act_no = apl.volun_act_no
-WHERE apl.user_no = #{userNo} 
+WHERE apl.user_no = #{userNo}
   AND apl.VOLUNACT_APPLYSTATUS = 1
+  AND tva.Volun_Act_Proc_Begin >= TRUNC(SYSDATE)
 ]]>
-	</select>
+</select>
 
 
 
