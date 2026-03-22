@@ -19,6 +19,11 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="getTotalPostNoSearchOpt" resultType="int">
+		SELECT COUNT(*) FROM
+		tbl_community_post
+	</select>
 
 	<!-- 댓글 총 갯수 계산 -->
 	<select id="getTotalComment" parameterType="int"
