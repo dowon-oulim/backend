@@ -58,6 +58,15 @@ public class KkomiFrontController extends HttpServlet {
 			result = new RankingListController().execute(request, response);
 			System.out.println("랭킹 페이지 진입 완료");
 		}
+		case "/kkomi/mission.kko" ->{
+			System.out.println("미션 페이지 진입");
+			result = new MissionListOkController().execute(request, response);
+			System.out.println("미션 페이지 진입 완료");
+		}
+		case "/kkomi/storage.kko" ->{
+			
+		}
+		
 		}
 		
 		if(result != null && result.getPath() != null) {

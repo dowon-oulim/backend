@@ -39,4 +39,9 @@ public class VolunteerActivityDAO {
         sqlSession.update("volunAct.cancelVolunteer", dto);
     }
     
+    // 메인화면 조회용 봉사활동 리스트 조회
+    public List<VolunActivityDTO> selectMainVolActList(){
+    	return sqlSession.selectList("volunAct.selectVolunMain");
+    }
+    
 }

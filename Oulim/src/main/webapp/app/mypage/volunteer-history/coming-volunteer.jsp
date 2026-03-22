@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 
@@ -113,28 +113,6 @@
 				</div>
 
 
-				<div class="main-section3">
-					<a
-						href="${pageContext.request.contextPath}/front/html/volunteer-activity/volunAct-detail.html">
-
-						<div class="c-card">
-
-							<div class="c-card__header">
-								<span class="c-badge c-badge--primary">모집중</span>
-							</div>
-
-							<h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
-
-
-							<div class="c-card__footer">
-								<span>2026.02.03 ~ 2026.02.06</span>
-							</div>
-
-						</div>
-					</a>
-
-
-				</div>
 
 				<div class="main-section3">
 					<c:if test="${empty comingVol}">
@@ -159,15 +137,21 @@
 				</div>
 				<div>
 					<nav class="c-pagination">
-						<c:if test="${page > 1}">
-							<a class="c-pagination__link" href="?page=${page-1}">‹</a>
-						</c:if>
-						<c:forEach var="i" begin="1" end="${lastPage}">
-							<a class="c-pagination__link ${i==page?'is-active':''}"
-								href="?page=${i}">${i}</a>
-						</c:forEach>
-						<c:if test="${page < lastPage}">
-							<a class="c-pagination__link" href="?page=${page+1}">›</a>
+						<c:if test="${lastPage > 1}">
+							<nav class="c-pagination">
+								<c:if test="${page > 1}">
+									<a class="c-pagination__link" href="?page=${page-1}">‹</a>
+								</c:if>
+
+								<c:forEach var="i" begin="1" end="${lastPage}">
+									<a class="c-pagination__link ${i==page?'is-active':''}"
+										href="?page=${i}">${i}</a>
+								</c:forEach>
+
+								<c:if test="${page < lastPage}">
+									<a class="c-pagination__link" href="?page=${page+1}">›</a>
+								</c:if>
+							</nav>
 						</c:if>
 					</nav>
 

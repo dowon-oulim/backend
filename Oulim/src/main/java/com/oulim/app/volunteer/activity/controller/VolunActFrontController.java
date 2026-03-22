@@ -68,8 +68,12 @@ public class VolunActFrontController extends HttpServlet {
  		    System.out.println("봉사 철회 완료");
  		    break;
  		
- 			
- 	
+ 		case "/volunteer-activity/main.va":
+ 			System.out.println("메인화면 봉사 리스트 조회 요청");
+ 			result = new VolunActMainController().execute(request, response);
+ 			System.out.println("메인화면 봉사 리스트 조회 완료");
+ 			break;
+ 		    
  			
  			
 

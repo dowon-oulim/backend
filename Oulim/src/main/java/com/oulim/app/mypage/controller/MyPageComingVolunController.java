@@ -47,6 +47,9 @@ public class MyPageComingVolunController implements Execute {
 		request.setAttribute("comingVol", comingVol);
 		request.setAttribute("page", page);
 		request.setAttribute("lastPage", lastPage);
+		
+		System.out.println("totalCount = " + totalCount);
+		System.out.println("lastPage = " + lastPage);
 
 		result.setPath("/app/mypage/volunteer-history/coming-volunteer.jsp");
 		result.setRedirect(false);

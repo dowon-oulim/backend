@@ -105,4 +105,10 @@ public class CommunityDAO {
 		sqlSession.insert("community.commentInsert", communityCommentDTO);
 		System.out.println("댓글 작성 성공");
 	}
+	
+	// 메인 노출용 게시글 조회
+	public List<CommunityPostJoinDTO> selectMainPost(){
+		System.out.println("메인 화면 노출을 위한 봉사 후기 조회");
+		return sqlSession.selectList("community.searchImagePost");
+	}
 }

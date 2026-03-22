@@ -87,7 +87,7 @@ public class AdminFrontController extends HttpServlet {
 
 		case "/admin/memdetail.adm":
 			System.out.println("회원 상세 요청");
-			result = new AdminMemDetailController().execute(request, response);
+			result = new AdmVolManDetaController().execute(request, response);
 			break;	
 		
 		case "/admin/memedit.adm":
@@ -97,12 +97,12 @@ public class AdminFrontController extends HttpServlet {
 			
 		case "/admin/volunlist.adm":
 			System.out.println("봉사 목록 요청");
-			result = new AdminVolunListController().execute(request, response);
+			result = new AdmVolManController().execute(request, response);
 			break;	
 
 		case "/admin/volundetail.adm":
 			System.out.println("봉사 상세 요청");
-			result = new AdminVolunDetailController().execute(request, response);
+			result = new AdmVolManDetaController().execute(request, response);
 			break;	
 			
 		case "/admin/postlist.adm":
@@ -124,7 +124,6 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("기업 상세 요청");
 			result = new AdminCompanyDetailController().execute(request, response);
 			break;	
-			
 			
 			
 		}
