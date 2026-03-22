@@ -10,5 +10,36 @@ resultType="int">
     FROM tbl_admin_account
     WHERE admin_id = #{adminId}
       AND admin_pw = #{adminPw}
+</select>
+
+<select id="selectStatistic" resultType="AdminStatisticDTO">
+SELECT 
+u.total_user,
+u.NOT_APPROVED_ORGAN_USER,
+u.total_organ_user,
+o.organ_count,
+ap.uncomplete_volun_act,
+va.TOTAL_VOLUN_ACT 
+FROM
+(SELECT 
+count(*) AS total_user,
+count(CASE WHEN user_status = 2 AND user_type = 2 THEN 1 END) AS NOT_APPROVED_ORGAN_USER,
+count(CASE WHEN user_type = 2 THEN 1 END ) AS total_organ_user 
+FROM TBL_USER tu ) u, 
+(SELECT count(*) AS organ_count 
+FROM tbl_organ tbo) o,
+(SELECT count(DISTINCT tva.VOLUN_ACT_NO ) AS uncomplete_volun_act
+FROM TBL_VOLUN_APPLY tva WHERE tva.VOLUNACT_ATTENDANCE = 0) ap,
+(SELECT count(*) AS total_volun_act FROM tbl_volun_activity) va
 </select> 
+
+<select id="getRequireApproveMember" resultType="UserDTO">
+	select user_no, organ_name, user_id, user_email
+	from tbl_user
+	where user_type = 2 and user_status = 2
+</select>
+
+
+
+
 </mapper>

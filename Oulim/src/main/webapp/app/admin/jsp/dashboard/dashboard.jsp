@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,6 +24,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/dashboard/dashboard.css" />
   <script defer src="${pageContext.request.contextPath}/app/admin/js/dashboard/dashboard.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/aside.css" />
+
 </head>
 
 <body>
@@ -36,26 +39,26 @@
         </div>
 
         <div id="content-area">
-          <p>2026-03-04</p>
+          <p>${statistic.currDate}</p>
         </div>
         <div class="today">
           <div id="content-area">
-            <p>현재 진행중 봉사: 1000000</p>
+            <p>현재 진행중 봉사: ${statistic.totalVolunAct }</p>
           </div>
           <div id="content-area">
-            <p>결제 미처리 봉사건 : 3000</p>
+            <p>결제 미처리 봉사건 : ${statistic.uncompleteVolunAct }</p>
           </div>
           <div id="content-area">
-            <p>가입 기업: 30</p>
+            <p>가입 기업: ${statistic.organCount }</p>
           </div>
           <div id="content-area">
-            <p>미처리 기업회원 : 3000</p>
+            <p>미처리 기업회원 : ${statistic.notApprovedOrganUser }</p>
           </div>
           <div id="content-area">
-            <p>총 단체 회원수 : 3000</p>
+            <p>총 단체 회원수 : ${statistic.totalOrganUser }</p>
           </div>
           <div id="content-area">
-            <p>총 회원수 : 3000</p>
+            <p>총 회원수 : ${statistic.totalUser}</p>
           </div>
         </div>
         <!-- 미처리 봉사건 -->
@@ -135,31 +138,23 @@
             <div class="c-list__header">
               <span class="c-list__col">단체명</span>
               <span class="c-list__col">이름</span>
-              <span class="c-list__col">신청일</span>
+              <span class="c-list__col">아이디</span>
               <span class="c-list__col">이메일</span>
             </div>
-            <div class="c-list__body">
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 봉사만세</span>
-                <span class="c-list__col clicktitle"> 김말순 </span>
-                <span class="c-list__col clicktitle"> 2026-01-01 </span>
-                <span class="c-list__col clicktitle"> qwer@asdf.com</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 봉사만세</span>
-                <span class="c-list__col clicktitle"> 김말순 </span>
-                <span class="c-list__col clicktitle"> 2026-01-01 </span>
-                <span class="c-list__col clicktitle"> qwer@asdf.com</span>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 봉사만세</span>
-                <span class="c-list__col clicktitle"> 김말순 </span>
-                <span class="c-list__col clicktitle"> 2026-01-01 </span>
-                <span class="c-list__col clicktitle"> qwer@asdf.com</span>
-              </div>
+              <c:if test="${not empty userList}">
+              	<c:forEach var="user" items="${userList }">
+		             <div class="c-list__body">
+		              <div class="c-list__row">
+		                <span class="c-list__col clicktitle"> ${user.organName}</span>
+		                <span class="c-list__col clicktitle"> ${user.userName } </span>
+		                <span class="c-list__col clicktitle">${user.userId } </span>
+		                <span class="c-list__col clicktitle"> ${user.userEmail }</span>
+		              </div>
+		              </div>
+              	</c:forEach>
+              </c:if>
             </div>
           </div>
-        </div>
       </section>
     </main>
 

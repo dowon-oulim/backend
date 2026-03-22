@@ -4,7 +4,7 @@
   <div class="adminnow">
     <div class="profile-circle">
       </div>
-    <button type="button" class="c-button—logout" onclick="location.href='/logout'">로그아웃</button>
+    <button type="button" class="c-button—logout" onclick="location.href='${pageContext.request.contextPath}/admin/logout.adm'">로그아웃</button>
   </div>
 
   <nav class="sidebar-menu">

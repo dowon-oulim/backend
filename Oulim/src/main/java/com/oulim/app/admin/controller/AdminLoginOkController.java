@@ -43,7 +43,7 @@ public class AdminLoginOkController implements Execute {
 
 	    //세션값 불러오기
 	    if(adminNo != 0) {
-	          path = "/app/admin/jsp/dashboard/dashboard.jsp"; //로그인 성공시 경로
+	          path = "/admin/dashboard.adm"; //로그인 성공시 경로
 		      session.setAttribute("adminNo", adminNo);
 	          System.out.println("세션값 : " + adminNo);
 //		      path = "/app/admin/jsp/dashboard/dashboard.jsp"; // 로그인 성공 시 대시보드
