@@ -155,7 +155,7 @@
 	      	<div class="c-button-group">
 	                <div>
 	                  <button type="button" id="repostBtn" class="c-button c-button--primary c-button--md"
-	                  onclick="${contextPath}/community/repost.commu">수정</button>
+	                  onclick="location.href = '${contextPath}/community/repost.commu?postNo=${post.postNo}'">수정</button>
 	                </div>
 	                <div>
 	                  <button type="button" id="deleteBtn" class="c-warning-delete-button">삭제</button>
