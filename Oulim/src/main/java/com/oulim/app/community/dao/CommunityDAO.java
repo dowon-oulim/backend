@@ -20,9 +20,9 @@ public class CommunityDAO {
 	}
 
 	// 게시글 총 갯수 반환 메소드
-	public int getPostTotal() {
+	public int getPostTotal(Map<String, Object> searchMap) {
 		System.out.println("게시글 총 개수 조회 - getPostTotal 메소드 실행");
-		return sqlSession.selectOne("community.getTotalPost");
+		return sqlSession.selectOne("community.getTotalPost",searchMap);
 	}
 
 	// 댓글 총 갯수 반환 메소드
