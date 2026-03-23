@@ -63,9 +63,26 @@ public class CommunityWriteOKController implements Execute{
 	      //MultipartRequest를 이용한 데이터 파싱
 	      MultipartRequest multipartRequest = new MultipartRequest(request, UPLOAD_PATH, FILE_SIZE, "utf-8", 
 	            new DefaultFileRenamePolicy()); 
-		
-	      postDTO.setPostTitle(multipartRequest.getParameter("postTitle"));
-	      postDTO.setPostContent(multipartRequest.getParameter("postContent"));
+	      String postTitle = multipartRequest.getParameter("postTitle");
+	      postTitle = postTitle == null ? "" : postTitle;
+	      if(postTitle.getBytes("UTF-8").length > 100) {
+	    	  System.out.println("제목 최대 글자 수 초과");
+	    	  request.setAttribute("msg", "titleSizeOver");
+	    	  result.setPath("/community/post.commu");
+	    	  result.setRedirect(false);
+	    	  return result;
+	      }
+	      postDTO.setPostTitle(postTitle);
+	      String postContent = multipartRequest.getParameter("postContent");
+	      postContent = postContent == null ? "" : postContent;
+	      if(postContent.getBytes("UTF-8").length > 4000) {
+	    	  System.out.println("본문 최대 글자 수 초과");
+	    	  request.setAttribute("msg", "contentSizeOver");
+	    	  result.setPath("/community/post.commu");
+	    	  result.setRedirect(false);
+	    	  return result;
+	      }
+	      postDTO.setPostContent(postContent);
 	      postDTO.setUserNo(userNo);
 	      postDTO.setUserNickname(userNickname);
 	      System.out.println("게시글 추가 - postJoinDTO : " + postDTO);

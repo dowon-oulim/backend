@@ -33,6 +33,14 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
   
   <script>
+	  const msg = "${msg}";
+		
+	  if (msg === "titleSizeOver") {
+	    alert("제목 최대 글자 수를 초과하였습니다.");
+	  } else if (msg === "contentSizeOver") {
+	    alert("내용 최대 글자 수를 초과하였습니다.");
+	  }
+  
    	const contextPath = "${pageContext.request.contextPath}";
 	const isLogin = ${not empty sessionScope.userNo};
 	const loginUserNo = ${sessionScope.userNo};
@@ -58,13 +66,13 @@
               <div class="c-community-post-title">
                 <label for="title"><b>제목</b></label>
                 <!-- 컴포넌트 c-input 사용 -->
-                <input class="c-input" type="text" name="postTitle" id="title" placeholder="후기 제목 입력" required />
+                <input class="c-input" type="text" maxlength="50" name="postTitle" id="title" placeholder="후기 제목 입력" required />
               </div>
 
               <div class="l-community-post-detail">
                 <label for="content"><b>상세 내용 작성</b>
               </div>
-              <textarea class="c-textarea" id="content" name="postContent" placeholder="후기를 작성해주세요" required></textarea>
+              <textarea class="c-textarea" id="content" maxlength="2000" name="postContent" placeholder="후기를 작성해주세요" required></textarea>
             </div>
 
             <div class="l-community-post-img-attach">
