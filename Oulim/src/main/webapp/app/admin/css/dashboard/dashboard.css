@@ -1,71 +1,141 @@
-@charset "UTF-8";
-
-/* 전체 레이아웃 */
-
-body {
-  min-height: 100vh;
-}
-
+/* 레이아웃 구성 */
 .l-main {
-  display: flex;
-  min-height: 100vh;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
 }
-
-/* 메인위에 헤더 */
-.header {
-  padding-bottom: 30px;
-
-  border-bottom: 1px solid #ddd;
-
-  margin-bottom: 100px;
-}
-
-/* 메인 내용영역*/
 
 .l-content {
-  flex: 1;
-  background: #f0f0f0;
-  border: 1px solid black;
-
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  padding: 30px;
-  /* justify-content: center; */
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
 }
 
-/* 컨텐츠 박스 */
-
-#content-area {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid black;
+/* 헤더 타이틀 */
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
 }
-/* 위에상황판 */
+
+/* 오늘 날짜 표시 */
+#content-area p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 상단 통계 카드 섹션 */
 .today {
-  display: flex;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
 }
-/* 미완료 봉사목록 헤더 */
-.notyet-head {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
+
+.today #content-area {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    min-width: 160px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
-/*미완료 봉사활동 타이틀과  칸수정리 */
-/* 신규 신청기업 타이틀과 칸수 정리 */
-.c-list--4col .c-list__header,
-.c-list--4col .c-list__row {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+.today #content-area p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
 }
-/* 신규 신청기업 헤더 */
-.new-company-list {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
+
+/* 숫자 강조 (단위 포함) */
+.today #content-area p::after {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: #000;
+    margin-top: 10px;
+}
+
+/* 섹션 타이틀 및 바로가기 버튼 */
+.notyet-head, .new-company-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    margin-top: 30px;
+}
+
+.notyet-head p, .new-company-list p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 이미지와 동일한 초록색 버튼 스타일 */
+.volun-list, .new-company .c-button--primary {
+    background-color: #5bb318 !important;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 테이블(리스트) 스타일 커스텀 */
+.c-list {
+    background: #fff;
+    border-top: 2px solid #eee;
+}
+
+.c-list__header {
+    background-color: #f1f3f5;
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.c-list__col {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-list__row {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.c-list__row:hover {
+    background-color: #fafafa;
+}
+
+.c-list__row .clicktitle {
+    color: #333;
+    font-size: 14px;
+}
+
+/* 메일 발송 버튼 소형화 */
+.c-list__actions .c-button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.c-list__actions .c-button:hover {
+    background-color: #f8f9fa;
 }
